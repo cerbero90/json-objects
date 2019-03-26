@@ -83,15 +83,15 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/cerbero/json-objects.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/cerbero/json-objects/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cerbero/json-objects.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/cerbero/json-objects.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/cerbero90/json-objects/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cerbero90/json-objects.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/cerbero90/json-objects.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/cerbero/json-objects.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/cerbero/json-objects
-[link-travis]: https://travis-ci.org/cerbero/json-objects
-[link-scrutinizer]: https://scrutinizer-ci.com/g/cerbero/json-objects/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/cerbero/json-objects
+[link-travis]: https://travis-ci.org/cerbero90/json-objects
+[link-scrutinizer]: https://scrutinizer-ci.com/g/cerbero90/json-objects/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/cerbero90/json-objects
 [link-downloads]: https://packagist.org/packages/cerbero/json-objects
 [link-author]: https://github.com/cerbero90
 [link-jsonstreamingparser]: https://github.com/salsify/jsonstreamingparser
