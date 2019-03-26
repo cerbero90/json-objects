@@ -235,7 +235,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param string $key
      * @return void
      */
-    public function key($key) : void
+    public function key(string $key) : void
     {
         $this->keyByDepth[$this->depth] = $key;
 
@@ -277,7 +277,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param string $whitespace
      * @return void
      */
-    public function whitespace($whitespace) : void
+    public function whitespace(string $whitespace) : void
     {
         // Ignore the whitespaces
     }
