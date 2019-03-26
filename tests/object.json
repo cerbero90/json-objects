@@ -1,0 +1,29 @@
+{
+    "nested": [
+        {
+            "property": {
+                "value": 0
+            }
+        },
+        {
+            "property": {
+                "value": 1
+            }
+        },
+        {
+            "property": {
+                "value": 2
+            }
+        },
+        {
+            "property": {
+                "value": 3
+            }
+        },
+        {
+            "property": {
+                "value": 4
+            }
+        }
+    ]
+}
