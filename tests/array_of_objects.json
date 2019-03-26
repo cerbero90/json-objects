@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "some": {
+            "nested": {
+                "values": {
+                    "columns": [
+                        {
+                            "rows": [
+                                {
+                                    "items": [
+                                        {
+                                            "number": 0
+                                        },
+                                        {
+                                            "number": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "number": 2
+                                        },
+                                        {
+                                            "number": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "rows": [
+                                {
+                                    "items": [
+                                        {
+                                            "number": 4
+                                        },
+                                        {
+                                            "number": 5
+                                        }
+                                    ]
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "number": 6
+                                        },
+                                        {
+                                            "number": 7
+                                        }
+                                    ]
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "number": 8
+                                        },
+                                        {
+                                            "number": 9
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+]
