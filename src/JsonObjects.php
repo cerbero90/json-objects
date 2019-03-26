@@ -62,11 +62,13 @@ class JsonObjects
             throw new JsonObjectsException('Unable to create a stream from the given source.');
         }
 
-        $this->stream = extension_loaded('zlib') ? @gzopen($source, 'rb') : @fopen($source, 'rb');
+        $stream = extension_loaded('zlib') ? @gzopen($source, 'rb') : @fopen($source, 'rb');
 
-        if ($this->stream === false) {
+        if ($stream === false) {
             throw new JsonObjectsException("Failed to open stream from: {$source}");
         }
+
+        $this->stream = $stream;
     }
 
     /**
