@@ -14,50 +14,9 @@ class JsonObjectsTest extends TestCase
     public function cannotInitialiseIfSourceIsInvalid()
     {
         $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('Unable to create a stream from the given source.');
+        $this->expectExceptionMessage('Unable to create a stream from the given data.');
 
         new JsonObjects(100);
-    }
-
-    /**
-     * @test
-     */
-    public function cannotInitialiseIfSourceIsNotAccessible()
-    {
-        $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('Failed to open stream from: /inaccessible');
-
-        new JsonObjects('/inaccessible');
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAResource()
-    {
-        $instance = new JsonObjects(STDIN);
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAFile()
-    {
-        $instance = new JsonObjects(__DIR__ . '/array_of_objects.json');
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAnEndpoint()
-    {
-        $instance = new JsonObjects('https://httpbin.org/get');
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
     }
 
     /**
