@@ -14,3 +14,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Changed
 - Use intermediate variable to check whether a source is valid
+
+
+## v1.1.0 - 2019-04-25
+
+### Added
+- Support for PSR-7 messages and streams
