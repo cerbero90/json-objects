@@ -131,11 +131,10 @@ class DataStreamingTest extends TestCase
      */
     public function canStreamWrapper()
     {
-        $double = m::mock(StreamInterface::class)
-            ->shouldReceive('isReadable', 'isWritable')
-            ->once()
-            ->andReturn(true)
-            ->getMock();
+        $double = m::mock(StreamInterface::class, [
+            'isReadable' => true,
+            'isWritable' => false,
+        ]);
 
         try {
             $this->dataStreaming->streamObject($double);
