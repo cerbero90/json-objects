@@ -19,8 +19,7 @@ $ composer require cerbero/json-objects
 
 ## Usage
 
-Simply pass the JSON source (files, endpoints, streams) and optionally the key where objects are contained to create a
-new instance of `JsonObjects`. You can also call the factory method `from()`:
+Simply pass the JSON source (files, endpoints, streams or PSR-7 compatible objects, like implementations of [MessageInterface][link-message-interface] or [StreamInterface][link-stream-interface]) and optionally the key where objects are contained to create a new instance of `JsonObjects`. You can also call the factory method `from()`:
 
 ``` php
 $source = 'https://jsonplaceholder.typicode.com/users';
@@ -95,3 +94,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-downloads]: https://packagist.org/packages/cerbero/json-objects
 [link-author]: https://github.com/cerbero90
 [link-jsonstreamingparser]: https://github.com/salsify/jsonstreamingparser
+[link-message-interface]: https://github.com/php-fig/http-message/blob/master/src/MessageInterface.php
+[link-stream-interface]: https://github.com/php-fig/http-message/blob/master/src/StreamInterface.php

@@ -14,50 +14,9 @@ class JsonObjectsTest extends TestCase
     public function cannotInitialiseIfSourceIsInvalid()
     {
         $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('Unable to create a stream from the given source.');
+        $this->expectExceptionMessage('Unable to create a stream from the given data.');
 
         new JsonObjects(100);
-    }
-
-    /**
-     * @test
-     */
-    public function cannotInitialiseIfSourceIsNotAccessible()
-    {
-        $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('Failed to open stream from: /inaccessible');
-
-        new JsonObjects('/inaccessible');
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAResource()
-    {
-        $instance = new JsonObjects(STDIN);
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAFile()
-    {
-        $instance = new JsonObjects(__DIR__ . '/array_of_objects.json');
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
-    }
-
-    /**
-     * @test
-     */
-    public function canInitialiseIfSourceIsAnEndpoint()
-    {
-        $instance = new JsonObjects('https://httpbin.org/get');
-
-        $this->assertInstanceOf(JsonObjects::class, $instance);
     }
 
     /**
@@ -217,5 +176,37 @@ class JsonObjectsTest extends TestCase
         ];
 
         $this->assertManyItemsAreProcessed($expected, $source, $key);
+    }
+
+    /**
+     * @test
+     */
+    public function canProcessRemainingItems()
+    {
+        $source = __DIR__ . '/array_of_objects.json';
+        $key = 'some.nested.values.columns.*.rows.*.items.*';
+        $expected = [
+            ['number' => 0],
+            ['number' => 1],
+            ['number' => 2],
+            ['number' => 3],
+            ['number' => 4],
+            ['number' => 5],
+            ['number' => 6],
+            ['number' => 7],
+            ['number' => 8],
+            ['number' => 9],
+        ];
+
+        $items = null;
+
+        JsonObjects::from($source, $key)->chunk(4, function ($objects) use (&$items) {
+            static $result = [];
+            $result = array_merge($result, $objects);
+            $items = $result;
+        });
+
+        // This will fail if we could not process many items at a time
+        $this->assertSame($expected, $items);
     }
 }

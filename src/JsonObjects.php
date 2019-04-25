@@ -38,37 +38,8 @@ class JsonObjects
      */
     public function __construct($source, string $key = null)
     {
-        $this->setStreamFromSource($source);
-
+        $this->stream = (new DataStreaming)->streamData($source);
         $this->key = $key;
-    }
-
-    /**
-     * Set the JSON stream from the given source
-     *
-     * @param mixed $source
-     * @return void
-     *
-     * @throws JsonObjectsException
-     */
-    protected function setStreamFromSource($source) : void
-    {
-        if (is_resource($source)) {
-            $this->stream = $source;
-            return;
-        }
-
-        if (!is_string($source)) {
-            throw new JsonObjectsException('Unable to create a stream from the given source.');
-        }
-
-        $stream = extension_loaded('zlib') ? @gzopen($source, 'rb') : @fopen($source, 'rb');
-
-        if ($stream === false) {
-            throw new JsonObjectsException("Failed to open stream from: {$source}");
-        }
-
-        $this->stream = $stream;
     }
 
     /**
