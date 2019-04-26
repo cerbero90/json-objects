@@ -20,3 +20,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 - Support for PSR-7 messages and streams
+
+
+## v1.1.1 - 2019-04-26
+
+### Fixed
+- Fixed streaming from PSR-7 classes by adding a custom stream wrapper
