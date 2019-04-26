@@ -26,3 +26,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 - Fixed streaming from PSR-7 classes by adding a custom stream wrapper
+
+
+## v1.1.2 - 2019-04-26
+
+### Added
+- Support for PHP 7.1
