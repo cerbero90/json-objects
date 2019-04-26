@@ -29,6 +29,16 @@ class DataStreamingTest extends TestCase
     }
 
     /**
+     * Tear the tests down
+     *
+     * @return void
+     */
+    public function tearDown() : void
+    {
+        m::close();
+    }
+
+    /**
      * @test
      */
     public function canStreamDataDependingOnType()
@@ -106,24 +116,15 @@ class DataStreamingTest extends TestCase
      */
     public function canStreamMessage()
     {
-        $double = m::mock(MessageInterface::class)
-            ->shouldReceive('getBody')
-            ->once()
-            ->andReturnUsing(function () {
-                return m::mock(StreamInterface::class)
-                    ->shouldReceive('isReadable', 'isWritable')
-                    ->once()
-                    ->andReturn(true)
-                    ->getMock();
-            })
-            ->getMock();
+        $double = m::mock(MessageInterface::class, [
+            'getBody' => m::mock(StreamInterface::class, [
+                'isReadable' => true,
+            ]),
+        ]);
 
-        try {
-            $this->dataStreaming->streamObject($double);
-        } catch (\Exception $e) {
-            // Test only the mock assertions
-            $this->assertInstanceOf(JsonObjectsException::class, $e);
-        }
+        $resource = $this->dataStreaming->streamObject($double);
+
+        $this->assertIsResource($resource);
     }
 
     /**
@@ -133,30 +134,24 @@ class DataStreamingTest extends TestCase
     {
         $double = m::mock(StreamInterface::class, [
             'isReadable' => true,
-            'isWritable' => false,
         ]);
 
-        try {
-            $this->dataStreaming->streamObject($double);
-        } catch (\Exception $e) {
-            // Test only the mock assertions
-            $this->assertInstanceOf(JsonObjectsException::class, $e);
-        }
+        $resource = $this->dataStreaming->streamObject($double);
+
+        $this->assertIsResource($resource);
     }
 
     /**
      * @test
      */
-    public function cannotStreamInvalidWrapper()
+    public function cannotStreamUnreadableWrapper()
     {
         $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('Failed to open stream from the given stream wrapper.');
+        $this->expectExceptionMessageRegExp('/Failed to open stream from .*StreamInterface/');
 
-        $double = m::mock(StreamInterface::class)
-            ->shouldReceive('isReadable', 'isWritable')
-            ->once()
-            ->andReturn(true)
-            ->getMock();
+        $double = m::mock(StreamInterface::class, [
+            'isReadable' => false,
+        ]);
 
         $this->dataStreaming->streamObject($double);
     }
@@ -170,22 +165,5 @@ class DataStreamingTest extends TestCase
         $this->expectExceptionMessage('Unable to create a stream from stdClass');
 
         $this->dataStreaming->streamObject(new \stdClass);
-    }
-
-    /**
-     * @test
-     */
-    public function cannotStreamWrapperUnlessReadableOrWritable()
-    {
-        $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessage('The stream is not readable or writable.');
-
-        $double = m::mock(StreamInterface::class)
-            ->shouldReceive('isReadable', 'isWritable')
-            ->once()
-            ->andReturn(false)
-            ->getMock();
-
-        $this->dataStreaming->streamObject($double);
     }
 }

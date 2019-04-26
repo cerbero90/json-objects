@@ -97,43 +97,20 @@ class DataStreaming
      */
     public function streamWrapper(StreamInterface $stream)
     {
-        // Register this class as stream wrapper if not already registered
-        if (!in_array('cerbero-json-objects', stream_get_wrappers())) {
-            stream_wrapper_register('cerbero-json-objects', static::class);
+        // Register the stream wrapper if not already registered
+        if (!in_array(StreamWrapper::NAME, stream_get_wrappers())) {
+            stream_wrapper_register(StreamWrapper::NAME, StreamWrapper::class);
         }
 
-        $mode = $this->getModeByStream($stream);
-
         // Retrieve a handler of the opened stream
-        $resource = @fopen('cerbero-json-objects://stream', $mode, false, stream_context_create([
-            'cerbero-json-objects' => compact('stream'),
+        $resource = @fopen(StreamWrapper::NAME . '://stream', 'rb', false, stream_context_create([
+            StreamWrapper::NAME => compact('stream'),
         ]));
 
         if ($resource === false) {
-            throw new JsonObjectsException('Failed to open stream from the given stream wrapper.');
+            throw new JsonObjectsException('Failed to open stream from ' . get_class($stream));
         }
 
         return $resource;
-    }
-
-    /**
-     * Retrieve the mode to open the given stream
-     *
-     * @param \Psr\Http\Message\StreamInterface $stream
-     * @return string
-     *
-     * @throws JsonObjectsException
-     */
-    private function getModeByStream(StreamInterface $stream) : string
-    {
-        if ($stream->isReadable()) {
-            return $stream->isWritable() ? 'r+b' : 'rb';
-        }
-
-        if ($stream->isWritable()) {
-            return 'wb';
-        }
-
-        throw new JsonObjectsException('The stream is not readable or writable.');
     }
 }
