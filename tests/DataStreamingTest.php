@@ -45,7 +45,7 @@ class DataStreamingTest extends TestCase
     {
         $resource = $this->dataStreaming->streamData(STDIN);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -66,7 +66,7 @@ class DataStreamingTest extends TestCase
     {
         $resource = $this->dataStreaming->streamResource(STDIN);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -87,7 +87,7 @@ class DataStreamingTest extends TestCase
     {
         $resource = $this->dataStreaming->streamString(__DIR__ . '/array_of_objects.json');
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -97,7 +97,7 @@ class DataStreamingTest extends TestCase
     {
         $resource = $this->dataStreaming->streamString('https://httpbin.org/get');
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -114,6 +114,17 @@ class DataStreamingTest extends TestCase
     /**
      * @test
      */
+    public function cannotStreamInvalidObject()
+    {
+        $this->expectException(JsonObjectsException::class);
+        $this->expectExceptionMessage('Unable to stream content from object while providing integer');
+
+        $this->dataStreaming->streamObject(11);
+    }
+
+    /**
+     * @test
+     */
     public function canStreamMessage()
     {
         $double = m::mock(MessageInterface::class, [
@@ -124,7 +135,7 @@ class DataStreamingTest extends TestCase
 
         $resource = $this->dataStreaming->streamObject($double);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -138,7 +149,7 @@ class DataStreamingTest extends TestCase
 
         $resource = $this->dataStreaming->streamObject($double);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -159,7 +170,7 @@ class DataStreamingTest extends TestCase
     /**
      * @test
      */
-    public function cannotStreamInvalidObject()
+    public function cannotStreamUnknownObject()
     {
         $this->expectException(JsonObjectsException::class);
         $this->expectExceptionMessage('Unable to create a stream from stdClass');
