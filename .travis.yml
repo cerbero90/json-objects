@@ -15,15 +15,8 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-matrix:
-  include:
-    - php: 7.1
-      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
-  allow_failures:
-    - php: hhvm
-
 before_script:
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - travis_retry composer update --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phpcs --standard=psr2 src/
