@@ -35,7 +35,9 @@ new JsonObjects($source, 'address.geo');
 JsonObjects::from($source, 'address.geo');
 ```
 
-`JsonObjects` supports PSR-7, hence any implementation of [MessageInterface][link-message-interface] or [StreamInterface][link-stream-interface] is a valid source. This makes interactions with other packages supporting PSR-7 (e.g. Guzzle) even more convenient:
+When providing a key to extract objects from, you can use the dot notation to indicate nested sections of a JSON. For example `nested.*.key` extracts all the objects in the property `key` of every object contained in `nested`.
+
+Under the hood `JsonObjects` supports PSR-7, hence any implementation of [MessageInterface][link-message-interface] or [StreamInterface][link-stream-interface] is a valid source. This makes interactions with other packages supporting PSR-7 (e.g. Guzzle) even more convenient:
 
 ``` php
 $response = $guzzle->get('https://jsonplaceholder.typicode.com/users');
@@ -47,11 +49,7 @@ JsonObjects::from($response);
 JsonObjects::from($response->getBody());
 ```
 
-When providing a key to extract objects from, you can use the dot notation to indicate nested sections of a JSON. For
-example `nested.*.key` extracts all the objects in the property `key` of every object contained in `nested`.
-
-Finally you can decide whether to extract and process objects one by one or in chunks. The memory will be allocated to
-read these objects only instead of the whole JSON document:
+Finally you can decide whether to extract and process objects one by one or in chunks. The memory will be allocated to read these objects only instead of the whole JSON document:
 
 ``` php
 // Extract and process one object at a time from the given JSON source
