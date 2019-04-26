@@ -69,13 +69,17 @@ class DataStreaming
     /**
      * Stream content from the given object
      *
-     * @param object $object
+     * @param mixed $object
      * @return resource
      *
      * @throws JsonObjectsException
      */
-    public function streamObject(object $object)
+    public function streamObject($object)
     {
+        if (!is_object($object)) {
+            throw new JsonObjectsException('Unable to stream content from object while providing ' . gettype($object));
+        }
+
         if ($object instanceof MessageInterface) {
             $object = $object->getBody();
         }

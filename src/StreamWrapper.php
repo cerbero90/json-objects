@@ -7,6 +7,7 @@ use Psr\Http\Message\StreamInterface;
 /**
  * The stream wrapper.
  *
+ * @phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
  */
 class StreamWrapper
 {

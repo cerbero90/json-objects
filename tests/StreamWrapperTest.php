@@ -50,7 +50,7 @@ class StreamWrapperTest extends TestCase
 
         $resource = $this->openStreamWith($double);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
     }
 
     /**
@@ -102,7 +102,7 @@ class StreamWrapperTest extends TestCase
 
         $resource = $this->openStreamWith($double);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
         $this->assertTrue(feof($resource));
     }
 
@@ -121,7 +121,7 @@ class StreamWrapperTest extends TestCase
 
         $resource = $this->openStreamWith($double);
 
-        $this->assertIsResource($resource);
+        $this->assertTrue(is_resource($resource));
         $this->assertSame('abc', fread($resource, 3));
     }
 }
