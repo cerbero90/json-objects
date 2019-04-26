@@ -19,7 +19,7 @@ $ composer require cerbero/json-objects
 
 ## Usage
 
-Simply pass the JSON source (files, endpoints, streams or PSR-7 compatible objects, like implementations of [MessageInterface][link-message-interface] or [StreamInterface][link-stream-interface]) and optionally the key where objects are contained to create a new instance of `JsonObjects`. You can also call the factory method `from()`:
+Simply pass the JSON source (files, endpoints or streams) and optionally the key where objects are contained to create a new instance of `JsonObjects`. You can also call the factory method `from()`:
 
 ``` php
 $source = 'https://jsonplaceholder.typicode.com/users';
@@ -33,6 +33,18 @@ JsonObjects::from($source);
 new JsonObjects($source, 'address.geo');
 // or
 JsonObjects::from($source, 'address.geo');
+```
+
+`JsonObjects` supports PSR-7, hence any implementation of [MessageInterface][link-message-interface] or [StreamInterface][link-stream-interface] is a valid source. This makes interactions with other packages supporting PSR-7 (e.g. Guzzle) even more convenient:
+
+``` php
+$response = $guzzle->get('https://jsonplaceholder.typicode.com/users');
+
+// Create a new instance by passing an implementation of MessageInterface
+JsonObjects::from($response);
+
+// Create a new instance by passing an implementation of StreamInterface
+JsonObjects::from($response->getBody());
 ```
 
 When providing a key to extract objects from, you can use the dot notation to indicate nested sections of a JSON. For
