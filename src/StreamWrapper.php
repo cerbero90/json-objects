@@ -16,7 +16,7 @@ class StreamWrapper
      *
      * @var string
      */
-    const NAME = 'cerbero-json-objects';
+    public const NAME = 'cerbero-json-objects';
 
     /**
      * The stream context.
@@ -41,7 +41,7 @@ class StreamWrapper
      * @param mixed $opened_path
      * @return bool
      */
-    public function stream_open(string $path, string $mode, int $options, &$opened_path) : bool
+    public function stream_open(string $path, string $mode, int $options, &$opened_path): bool
     {
         $options = stream_context_get_options($this->context);
         $stream = $options[static::NAME]['stream'] ?? null;
@@ -60,7 +60,7 @@ class StreamWrapper
      *
      * @return bool
      */
-    public function stream_eof() : bool
+    public function stream_eof(): bool
     {
         return $this->stream->eof();
     }
@@ -71,7 +71,7 @@ class StreamWrapper
      * @param int $count
      * @return string
      */
-    public function stream_read(int $count) : string
+    public function stream_read(int $count): string
     {
         return $this->stream->read($count);
     }

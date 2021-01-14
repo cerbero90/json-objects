@@ -1,10 +1,14 @@
 # JSON Objects
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
+[![Author][ico-author]][link-author]
+[![PHP Version][ico-php]][link-php]
+[![Build Status][ico-actions]][link-actions]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
+[![Latest Version][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![PSR-7][ico-psr7]][link-psr7]
+[![PSR-12][ico-psr12]][link-psr12]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 This package extracts JSON objects from large JSON sources like files, endpoints and streams while saving memory. It parses heavy JSONs by using [JsonStreamingParser][link-jsonstreamingparser] and provides an easy API to declare what objects to extract and process.
@@ -14,7 +18,7 @@ This package extracts JSON objects from large JSON sources like files, endpoints
 Via Composer
 
 ``` bash
-$ composer require cerbero/json-objects
+composer require cerbero/json-objects
 ```
 
 ## Usage
@@ -49,7 +53,7 @@ JsonObjects::from($response);
 JsonObjects::from($response->getBody());
 ```
 
-Finally you can decide whether to extract and process objects one by one or in chunks. The memory will be allocated to read these objects only instead of the whole JSON document:
+Finally you can decide whether to extract and process objects one by one or in chunks. The memory will be allocated to read only these objects instead of the whole JSON document:
 
 ``` php
 // Extract and process one object at a time from the given JSON source
@@ -90,19 +94,27 @@ If you discover any security related issues, please email andrea.marco.sartori@g
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/cerbero/json-objects.svg?style=flat-square
+[ico-author]: https://img.shields.io/static/v1?label=author&message=cerbero90&color=50ABF1&logo=twitter&style=flat-square
+[ico-php]: https://img.shields.io/packagist/php-v/cerbero/json-objects?color=%234F5B93&logo=php&style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/cerbero/json-objects.svg?label=version&style=flat-square
+[ico-actions]: https://img.shields.io/github/workflow/status/cerbero90/json-objects/build?style=flat-square&logo=github
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/cerbero90/json-objects/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cerbero90/json-objects.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/cerbero90/json-objects.svg?style=flat-square
+[ico-psr7]: https://img.shields.io/static/v1?label=compliance&message=PSR-7&color=blue&style=flat-square
+[ico-psr12]: https://img.shields.io/static/v1?label=compliance&message=PSR-12&color=blue&style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/cerbero90/json-objects.svg?style=flat-square&logo=scrutinizer
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/cerbero90/json-objects.svg?style=flat-square&logo=scrutinizer
 [ico-downloads]: https://img.shields.io/packagist/dt/cerbero/json-objects.svg?style=flat-square
 
+[link-author]: https://twitter.com/cerbero90
+[link-php]: https://www.php.net
 [link-packagist]: https://packagist.org/packages/cerbero/json-objects
-[link-travis]: https://travis-ci.org/cerbero90/json-objects
+[link-actions]: https://github.com/cerbero90/json-objects/actions?query=workflow%3Abuild
+[link-psr7]: https://www.php-fig.org/psr/psr-7/
+[link-psr12]: https://www.php-fig.org/psr/psr-12/
 [link-scrutinizer]: https://scrutinizer-ci.com/g/cerbero90/json-objects/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/cerbero90/json-objects
 [link-downloads]: https://packagist.org/packages/cerbero/json-objects
-[link-author]: https://github.com/cerbero90
 [link-jsonstreamingparser]: https://github.com/salsify/jsonstreamingparser
 [link-message-interface]: https://github.com/php-fig/http-message/blob/master/src/MessageInterface.php
 [link-stream-interface]: https://github.com/php-fig/http-message/blob/master/src/StreamInterface.php
+[link-contributors]: ../../contributors
