@@ -51,7 +51,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param string $key
      * @return void
      */
-    public function setTargetFromKey(string $key) : self
+    public function setTargetFromKey(string $key): self
     {
         // Turn the key using dot notation into an array
         $this->target = array_filter(explode('.', $key));
@@ -64,7 +64,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return void
      */
-    public function startDocument() : void
+    public function startDocument(): void
     {
         // Ignore the start of the document
     }
@@ -74,7 +74,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return void
      */
-    public function endDocument() : void
+    public function endDocument(): void
     {
         // Free the memory at the end of the document
         $this->stack = [];
@@ -87,7 +87,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return void
      */
-    public function startObject() : void
+    public function startObject(): void
     {
         // Every object increases the depth when it starts
         $this->depth++;
@@ -103,7 +103,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return bool
      */
-    protected function shouldBeExtracted() : bool
+    protected function shouldBeExtracted(): bool
     {
         // All JSON objects should be extracted if no target is set
         if (empty($this->target)) {
@@ -120,7 +120,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return void
      */
-    public function endObject() : void
+    public function endObject(): void
     {
         // Every object decreases the depth when it ends
         $this->depth--;
@@ -148,7 +148,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return bool
      */
-    protected function shouldBeSkipped() : bool
+    protected function shouldBeSkipped(): bool
     {
         return !$this->shouldBeExtracted();
     }
@@ -159,14 +159,14 @@ abstract class AbstractListener implements ListenerInterface
      * @param array $object
      * @return void
      */
-    abstract protected function processExtractedObject(array $object) : void;
+    abstract protected function processExtractedObject(array $object): void;
 
     /**
      * Listen to the start of the array.
      *
      * @return void
      */
-    public function startArray() : void
+    public function startArray(): void
     {
         // If the document starts with an array, ignore it
         if ($this->depth === 0) {
@@ -191,7 +191,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return bool
      */
-    protected function isTarget() : bool
+    protected function isTarget(): bool
     {
         if (empty($this->target)) {
             return false;
@@ -206,7 +206,7 @@ abstract class AbstractListener implements ListenerInterface
      *
      * @return void
      */
-    public function endArray() : void
+    public function endArray(): void
     {
         // If the document ends with an array, ignore it
         if ($this->depth === 0) {
@@ -235,7 +235,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param string $key
      * @return void
      */
-    public function key(string $key) : void
+    public function key(string $key): void
     {
         $this->keyByDepth[$this->depth] = $key;
 
@@ -252,7 +252,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param mixed $value
      * @return void
      */
-    public function value($value) : void
+    public function value($value): void
     {
         if ($this->shouldBeSkipped()) {
             return;
@@ -277,7 +277,7 @@ abstract class AbstractListener implements ListenerInterface
      * @param string $whitespace
      * @return void
      */
-    public function whitespace(string $whitespace) : void
+    public function whitespace(string $whitespace): void
     {
         // Ignore the whitespaces
     }

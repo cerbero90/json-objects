@@ -46,7 +46,7 @@ class ChunkListener extends AbstractListener
      *
      * @return void
      */
-    public function endObject() : void
+    public function endObject(): void
     {
         parent::endObject();
 
@@ -62,7 +62,7 @@ class ChunkListener extends AbstractListener
      * @param array $object
      * @return void
      */
-    protected function processExtractedObject(array $object) : void
+    protected function processExtractedObject(array $object): void
     {
         $this->chunk[] = $object;
     }
@@ -72,7 +72,7 @@ class ChunkListener extends AbstractListener
      *
      * @return void
      */
-    public function endDocument() : void
+    public function endDocument(): void
     {
         if (!empty($this->chunk)) {
             call_user_func($this->callback, $this->chunk);

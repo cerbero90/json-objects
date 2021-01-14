@@ -37,7 +37,9 @@ class JsonObjectsTest extends TestCase
         $this->expectException(JsonObjectsException::class);
         $this->expectExceptionMessage('Parsing error in [1:1]. Document must start with object or array.');
 
-        JsonObjects::from(__DIR__ . '/invalid')->each(function () {});
+        JsonObjects::from(__DIR__ . '/invalid')->each(function () {
+            //
+        });
     }
 
     /**
@@ -60,7 +62,7 @@ class JsonObjectsTest extends TestCase
      * @param string|null $key
      * @return void
      */
-    protected function assertOneItemIsProcessed(array $expected, string $source, string $key = null) : void
+    protected function assertOneItemIsProcessed(array $expected, string $source, string $key = null): void
     {
         $item = null;
 
@@ -68,7 +70,7 @@ class JsonObjectsTest extends TestCase
             JsonObjects::from($source, $key)->each(function ($object) use (&$item) {
                 $item = $object;
                 // Prevent the next item to be extracted as we want to test the extraction only once
-                throw new JsonObjectsException;
+                throw new JsonObjectsException();
             });
         } catch (JsonObjectsException $e) {
             $this->assertSame($expected, $item);
@@ -127,7 +129,7 @@ class JsonObjectsTest extends TestCase
      * @param string|null $key
      * @return void
      */
-    protected function assertManyItemsAreProcessed(array $expected, string $source, string $key = null) : void
+    protected function assertManyItemsAreProcessed(array $expected, string $source, string $key = null): void
     {
         $items = null;
 
@@ -135,7 +137,7 @@ class JsonObjectsTest extends TestCase
             JsonObjects::from($source, $key)->chunk(3, function ($objects) use (&$items) {
                 $items = $objects;
                 // Prevent the next chunk to be extracted as we want to test the extraction only once
-                throw new JsonObjectsException;
+                throw new JsonObjectsException();
             });
         } catch (JsonObjectsException $e) {
             $this->assertSame($expected, $items);
