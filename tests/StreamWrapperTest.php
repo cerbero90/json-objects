@@ -17,7 +17,7 @@ class StreamWrapperTest extends TestCase
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         // Register the stream wrapper if not already registered
         if (!in_array(StreamWrapper::NAME, stream_get_wrappers())) {
@@ -30,7 +30,7 @@ class StreamWrapperTest extends TestCase
      *
      * @return void
      */
-    public function tearDown() : void
+    public function tearDown(): void
     {
         if (in_array(StreamWrapper::NAME, stream_get_wrappers())) {
             stream_wrapper_unregister(StreamWrapper::NAME);
@@ -71,7 +71,7 @@ class StreamWrapperTest extends TestCase
      */
     public function cannotOpenInvalidStream()
     {
-        $bool = $this->openStreamWith(new \stdClass);
+        $bool = $this->openStreamWith(new \stdClass());
 
         $this->assertFalse($bool);
     }

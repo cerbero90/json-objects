@@ -38,7 +38,7 @@ class JsonObjects
      */
     public function __construct($source, string $key = null)
     {
-        $this->stream = (new DataStreaming)->streamData($source);
+        $this->stream = (new DataStreaming())->streamData($source);
         $this->key = $key;
     }
 
@@ -51,7 +51,7 @@ class JsonObjects
      *
      * @throws JsonObjectsException
      */
-    public static function from($source, string $key = null) : self
+    public static function from($source, string $key = null): self
     {
         return new static($source, $key);
     }
@@ -64,7 +64,7 @@ class JsonObjects
      *
      * @throws JsonObjectsException
      */
-    public function each(callable $callback) : void
+    public function each(callable $callback): void
     {
         $this->parseStreamWithListener(new ObjectListener($callback));
     }
@@ -77,7 +77,7 @@ class JsonObjects
      *
      * @throws JsonObjectsException
      */
-    protected function parseStreamWithListener(AbstractListener $listener) : void
+    protected function parseStreamWithListener(AbstractListener $listener): void
     {
         if ($this->key !== null) {
             $listener->setTargetFromKey($this->key);
@@ -101,7 +101,7 @@ class JsonObjects
      *
      * @throws JsonObjectsException
      */
-    public function chunk(int $size, callable $callback) : void
+    public function chunk(int $size, callable $callback): void
     {
         $this->parseStreamWithListener(new ChunkListener($size, $callback));
     }

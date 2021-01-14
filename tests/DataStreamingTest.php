@@ -23,9 +23,9 @@ class DataStreamingTest extends TestCase
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->dataStreaming = new DataStreaming;
+        $this->dataStreaming = new DataStreaming();
     }
 
     /**
@@ -33,7 +33,7 @@ class DataStreamingTest extends TestCase
      *
      * @return void
      */
-    public function tearDown() : void
+    public function tearDown(): void
     {
         m::close();
     }
@@ -158,7 +158,12 @@ class DataStreamingTest extends TestCase
     public function cannotStreamUnreadableWrapper()
     {
         $this->expectException(JsonObjectsException::class);
-        $this->expectExceptionMessageRegExp('/Failed to open stream from .*StreamInterface/');
+
+        $method = method_exists($this, 'expectExceptionMessageRegExp')
+            ? 'expectExceptionMessageRegExp'
+            : 'expectExceptionMessageMatches';
+
+        $this->$method('/Failed to open stream from .*StreamInterface/');
 
         $double = m::mock(StreamInterface::class, [
             'isReadable' => false,
@@ -175,6 +180,6 @@ class DataStreamingTest extends TestCase
         $this->expectException(JsonObjectsException::class);
         $this->expectExceptionMessage('Unable to create a stream from stdClass');
 
-        $this->dataStreaming->streamObject(new \stdClass);
+        $this->dataStreaming->streamObject(new \stdClass());
     }
 }

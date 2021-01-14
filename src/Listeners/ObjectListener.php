@@ -31,7 +31,7 @@ class ObjectListener extends AbstractListener
      * @param array $object
      * @return void
      */
-    protected function processExtractedObject(array $object) : void
+    protected function processExtractedObject(array $object): void
     {
         call_user_func($this->callback, $object);
     }
